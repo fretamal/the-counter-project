@@ -1,0 +1,24 @@
+.CounterListWrapper{
+    flex:1;
+    padding-left: 15px;
+}
+.Table{
+    margin-top: 20px;
+    width: 100%;
+    border-spacing: 0px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.Table thead tr th{
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-align: left;
+    font-weight: 200;
+}
+
+.Table tbody tr td{
+    padding: 10px 0px;
+    margin: 10px;
+}

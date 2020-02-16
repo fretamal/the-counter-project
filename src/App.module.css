@@ -1,0 +1,37 @@
+.AppWrapper {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  background-color: #e6e6e6;
+  color: #333333;
+}
+
+.ContentWrapper{
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  flex-basis: 60%;
+  max-width: 800px;
+  padding: 0px 20px;
+  -webkit-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+}
+.HeaderWrapper{
+  padding-bottom: 20px;
+}
+.MainWrapper{
+  flex: 1;
+}
+
+.SideBar{
+  display: flex;
+  height: 100%;
+}
+
+.Titulo{
+  text-transform: uppercase;
+  color: #333333;
+  font-weight: 200;
+  letter-spacing: 10px;
+}

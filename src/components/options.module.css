@@ -1,0 +1,82 @@
+.OptionsWrapper{
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(0,0,0,0.1);
+    max-width: 200px;
+    height: 100%;
+}
+.SortWrapper{
+    display: flex;
+    flex-direction: column;
+}
+.SortBy{
+    padding-top: 20px;
+    text-transform: uppercase;
+    font-weight: 200;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+.SortSelect{
+    margin: 10px 10px;
+}
+.FilterWrapper{
+    display: flex;
+    flex-direction: column;
+}
+.FilterLine{
+    min-height: 30px;
+}
+.FilterText, .SearchText{
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    font-weight: 200;
+    font-size: 12px;
+    letter-spacing: 5px;
+    margin-top: 30px;
+
+}
+.FilterOption{
+    text-transform: uppercase;
+    font-weight: 200;
+    font-size: 11px;
+    line-height: 20px;
+    /* letter-spacing: 5px; */
+}
+.FilterInput{
+    border: 0px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-left: 10px;
+    margin-right: 5px;
+    width: 100px;
+}
+.SearchWrapper{
+}
+.SearchInput{
+    border: 0px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-right: 10px;
+}
+.SearchInput::placeholder{
+    font-size: 10px;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+.SearchBtn{
+    background-color: #38AECC;
+    border: 0px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 10px;
+    padding: 5px 10px;
+    font-weight: 700;
+}
+.SearchBtn:hover{
+    background-color: #2ea0bd;
+    cursor: pointer;
+}
+.SearchImg{
+    width: 12px;
+
+}

@@ -1,0 +1,53 @@
+.CounterRow{
+    padding: 10px 10px;
+    margin: 10px 10px;
+}
+.Name{
+    padding-left: 5px;
+    font-weight: 400;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+.Count{
+    margin: 0px 10px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+.Subs{
+    background-color: #FF6663;
+    border: 0px;
+    width: 23px;
+    height: 23px;
+    border-radius: 20px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Subs:hover{
+    background-color: #f15754;
+}
+.Add{
+    background-color: #80D142;
+    border: 0px;
+    width: 23px;
+    height: 23px;
+    border-radius: 20px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+.Add:hover{
+    background-color: #72c334;
+}
+.Delete{
+    cursor: pointer;
+    border: 0px;
+    background-color: transparent;
+    padding:0px;
+    margin-right: 10px;
+}
+.Trash{
+    width: 20px;
+    height: 20px;
+}

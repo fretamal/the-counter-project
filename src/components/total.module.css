@@ -1,0 +1,18 @@
+.TotalWrapper{
+    display:flex;
+    justify-content: flex-end;
+    padding: 10px 10px 10px 10px; 
+    align-items: flex-end;
+}
+.Total{
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+.TotalValue{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 3px;
+}
