@@ -54,16 +54,71 @@ export const newCounter = (id, name, value) => {
 }
 
 export const incrementCount = (id) => {
-    return{
-        type : INCREMENT,
-        payload: { id }
+
+    return(dispatch) =>{
+        // Firebase tiene un UID unico por elemento, primero se debe obtener ese uid para luego eliminar
+        // el elemento de la lista
+        let uid = null;
+        let counter = null;
+        axios.get('api/v1/counters.json?orderBy="id"&equalTo="'+id+'"')
+            .then((response) =>{
+                for(var i in response.data){
+                    uid = i;
+                    counter = response.data[i]
+                }
+                console.log(counter)
+                let newCounter = {...counter, value: counter.value+1}
+                axios.put('api/v1/counters/'+uid+'.json',newCounter)
+                    .then((response) => {
+                        console.log(response)
+                        dispatch({
+                            type : INCREMENT,
+                            payload: { id } 
+                        })
+                    })
+                    .catch( (error) => {
+                        console.log(error)
+                        dispatch({
+                            type : INCREMENT,
+                            payload: { error }
+                        })
+                    })
+                
+            }).catch((e) => console.log(e.message))
     }
 }
 
 export const decrementCount = (id) => {
-    return{
-        type : DECREMENT,
-        payload: { id }
+    return(dispatch) =>{
+        // Firebase tiene un UID unico por elemento, primero se debe obtener ese uid para luego eliminar
+        // el elemento de la lista
+        let uid = null;
+        let counter = null;
+        axios.get('api/v1/counters.json?orderBy="id"&equalTo="'+id+'"')
+            .then((response) =>{
+                for(var i in response.data){
+                    uid = i;
+                    counter = response.data[i]
+                }
+                console.log(counter)
+                let newCounter = {...counter, value: counter.value-1}
+                axios.put('api/v1/counters/'+uid+'.json',newCounter)
+                    .then((response) => {
+                        console.log(response)
+                        dispatch({
+                            type : DECREMENT,
+                            payload: { id } 
+                        })
+                    })
+                    .catch( (error) => {
+                        console.log(error)
+                        dispatch({
+                            type : DECREMENT,
+                            payload: { error }
+                        })
+                    })
+                
+            }).catch((e) => console.log(e.message))
     }
 }
 
