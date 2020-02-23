@@ -1,11 +1,29 @@
-import { INCREMENT, DECREMENT, NEWCOUNTER, DELETECOUNTER } from '../actions/'
+import { FETCHCOUNTERS, FETCHCOUNTERSFAIL, INCREMENT, DECREMENT, NEWCOUNTER, DELETECOUNTER } from '../actions/'
 
-const counterReducer = (state = [{name: 'contador 1',value:10},{name: 'contador 2',value:4}] , action) => {
+const initialState = {
+    items: null,
+    filteredItems: [],
+    max: '',
+    min: '',
+    sort: '',
+    error: false
+}
+
+const counterReducer = (state = [initialState] , action) => {
     switch(action.type){
+        case FETCHCOUNTERS:
+            return {...state, items: action.payload, error: false}
+        case FETCHCOUNTERSFAIL:
+            return {...state, error: true}
         case NEWCOUNTER:
-            return [...state, { name: action.payload.name, value: 0 }]
+            const newCounter = {id: action.payload.id , name: action.payload.name , value: action.payload.value} ;
+            return {
+                state, 
+                items: state.items.concat(newCounter), 
+                error: false
+            }
         case DELETECOUNTER:
-            return state.filter((name,i,state) => i !== action.payload.index)
+            return state.items.filter((name,i,state) => i !== action.payload.index)
         case INCREMENT:
             return state.map((counter,i)=>{
                 if(action.payload.index === i){
@@ -13,7 +31,6 @@ const counterReducer = (state = [{name: 'contador 1',value:10},{name: 'contador 
                 }
                 return counter
             })
-            break
         case DECREMENT:
             return state.map((counter,i)=>{
                 if(action.payload.index === i){
@@ -21,8 +38,6 @@ const counterReducer = (state = [{name: 'contador 1',value:10},{name: 'contador 
                 }
                 return counter
             })
-            break
-        
         default:
             return state
     }

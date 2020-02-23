@@ -1,15 +1,15 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import classes from './App.module.css';
 import reducers from './reducers/'
 import CountersList from './components/countersList'
-import Total from './components/total'
 import AddCounter from './components/addCounter'
 import Options from './components/options'
+import thunk from 'redux-thunk'
 
-
-const store = createStore(reducers)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 
 function App() {
   return (
@@ -25,10 +25,10 @@ function App() {
           <div className={classes.MainWrapper}>
             <div className={classes.SideBar}>
               <Options/>
-              <CountersList />
+              <CountersList/>
             </div>
           </div>
-          
+
         </div>
       </div>
 

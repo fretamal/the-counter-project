@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import classes from './counter.module.css';
 
 
@@ -13,7 +13,7 @@ const Counter = (props) => {
             </td>
             <td  Style="text-align:right">
                 <button className={classes.Delete} onClick={ () => props.deleteCounter(props.index) }>
-                    <img className={classes.Trash} src={require('../assets/trash.png')}/>    
+                    <img className={classes.Trash} src={require('../assets/trash.png')} alt="Borrar"/>    
                 </button>
             </td>
         </tr>

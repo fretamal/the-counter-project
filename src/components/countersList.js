@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { incrementCount, decrementCount, deleteCounter } from '../actions/'
+import { fetchCounters, incrementCount, decrementCount, deleteCounter } from '../actions/'
 import Counter from './counter'
 import classes from './countersList.module.css';
 import Total from './total'
 
 
 class Counters extends Component {
+
+    constructor(props){
+        super(props)
+        this.props.fetchCounters();
+    }
 
     renderCounters(){
         return this.props.counters.map((counter,index) =>{
@@ -22,40 +27,45 @@ class Counters extends Component {
                 />
             )
         })
-    } 
+    }
 
     render() {
         return (
             <div className={classes.CounterListWrapper}>
+
+                { console.log(this.props.counters)}
+
                 <table className={classes.Table}>
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th Style="text-align:center">Valor</th>
+                            <th>Valor</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.renderCounters()}
+                        {this.props.counters && this.renderCounters()}
                     </tbody>
                 </table>
                 <Total/>
             </div>
-        )        
+        )
     }
 }
 
 const mapStateToProps = (state) => {
     return{
-        counters: state.counters
+        counters: state.counters.items,
+        error: state.error
     }
 }
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = dispatch => {
     return{
+        fetchCounters,
         incrementCount,
         decrementCount,
-        deleteCounter
+        deleteCounter,
     }
 }
 

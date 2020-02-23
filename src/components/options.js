@@ -18,6 +18,7 @@ class Options extends Component {
                 <div className={classes.FilterWrapper}>
                     <p className={classes.FilterText}>Filtrar</p>
                     <table>
+                        <tbody>
                         <tr>
                             <td>
                                 <span className={classes.FilterOption}>Más de:</span>
@@ -34,13 +35,14 @@ class Options extends Component {
                                 <input className={classes.FilterInput}/>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div className={classes.SearchWrapper}>
                     <p className={classes.SearchText}>Buscar</p>
                     <input className={classes.SearchInput} placeholder="Por nombre" type="text"></input>
                     <button className={classes.SearchBtn}>
-                    <img className={classes.SearchImg} src={require('../assets/search2.png')}/>    
+                    <img className={classes.SearchImg} src={require('../assets/search2.png')} alt="buscar"/>    
 
                     </button>
                 </div>
