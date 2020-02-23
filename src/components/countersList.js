@@ -32,9 +32,6 @@ class Counters extends Component {
     render() {
         return (
             <div className={classes.CounterListWrapper}>
-
-                { console.log(this.props.counters)}
-
                 <table className={classes.Table}>
                     <thead>
                         <tr>

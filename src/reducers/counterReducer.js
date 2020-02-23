@@ -9,18 +9,19 @@ const initialState = {
     error: false
 }
 
-const counterReducer = (state = [initialState] , action) => {
+const counterReducer = (state = initialState , action) => {
     switch(action.type){
         case FETCHCOUNTERS:
             return {...state, items: action.payload, error: false}
         case FETCHCOUNTERSFAIL:
             return {...state, error: true}
         case NEWCOUNTER:
-            const newCounter = {id: action.payload.id , name: action.payload.name , value: action.payload.value} ;
+            console.log(action.payload);
+            // const newItem = {id:action.id, name:action.name, value:action.value}
+            // const newCounter = {id: action.id , name: action.name , value: action.value} ;
             return {
-                state, 
-                items: state.items.concat(newCounter), 
-                error: false
+                    ...state,
+                    items: state.items.concat(action.payload)
             }
         case DELETECOUNTER:
             return state.items.filter((name,i,state) => i !== action.payload.index)

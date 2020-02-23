@@ -19,7 +19,6 @@ export const fetchCounters = () => {
             for(let key in response.data){
                 fetchedCounters.push({...response.data[key]})
             }
-            console.log(fetchedCounters)
             dispatch({
                 type : FETCHCOUNTERS,
                 payload: fetchedCounters
@@ -29,6 +28,27 @@ export const fetchCounters = () => {
             console.log(error)
             dispatch({
                 type : FETCHCOUNTERSFAIL,
+            })
+        })
+    }
+}
+
+export const newCounter = (id, name, value) => {
+    return(dispatch) =>{
+    const counter = {id: id, name: name, value: value}
+    axios.post('api/v1/counters.json', counter)
+        .then((response) => {
+            // console.log(response)
+            dispatch({
+                type : NEWCOUNTER,
+                payload: counter 
+            })
+        })
+        .catch( (error) => {
+            console.log(error)
+            dispatch({
+                type : NEWCOUNTER,
+                payload: { error }
             })
         })
     }
@@ -48,39 +68,7 @@ export const decrementCount = (index) => {
     }
 }
 
-function makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
- }
 
-export const newCounter = (name) => {
-    const counter = {id: makeid(7), name:name, value: 0}
-    axios.post('api/v1/counters.json', counter)
-        .then((response) => {
-            console.log(response)
-            return{
-                type : NEWCOUNTER,
-                payload: { counter }
-            }
-        })
-        .catch( (error) => {
-            console.log(error)
-            return{
-                type : NEWCOUNTER,
-                payload: { error }
-            }
-        })
-
-    return{
-        type : NEWCOUNTER,
-        payload: { name }
-    }
-}
 
 export const deleteCounter = (index) => {
     return{

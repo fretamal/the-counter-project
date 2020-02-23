@@ -14,6 +14,18 @@ class AddCounter extends Component {
         }
     }
     render() {
+
+        function makeid(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+               result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+         }
+
+         
         return (
             <div className={classes.AddWrapper}>
                 <h3 className={classes.Title}>Nuevo</h3>
@@ -25,7 +37,7 @@ class AddCounter extends Component {
                         value={this.state.name} 
                         onChange={(e) => this.setState({name: e.target.value}) }
                     />
-                    <button type="button" className={classes.Btn} onClick={() => this.props.newCounter(this.state.name) }>Agregar</button>
+                    <button type="button" className={classes.Btn} onClick={() => this.props.newCounter(makeid(7),this.state.name,0) }>Agregar</button>
                 </div>
             </div>
         )        
@@ -33,10 +45,10 @@ class AddCounter extends Component {
 }
 
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = dispatch => {
     return{
         newCounter
     }
 }
 
-export default connect('', mapDispatchToProps())(AddCounter)
+export default connect(null, mapDispatchToProps())(AddCounter)
