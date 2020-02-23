@@ -38,7 +38,6 @@ export const newCounter = (id, name, value) => {
     const counter = {id: id, name: name, value: value}
     axios.post('api/v1/counters.json', counter)
         .then((response) => {
-            // console.log(response)
             dispatch({
                 type : NEWCOUNTER,
                 payload: counter 
@@ -68,12 +67,32 @@ export const decrementCount = (id) => {
     }
 }
 
-
-
-export const deleteCounter = (index) => {
-    return{
-        type : DELETECOUNTER,
-        payload: { index }
+export const deleteCounter = (id) => {
+    return(dispatch) =>{
+        // Firebase tiene un UID unico por elemento, primero se debe obtener ese uid para luego eliminar
+        // el elemento de la lista
+        let uid = null;
+        axios.get('api/v1/counters.json?orderBy="id"&equalTo="'+id+'"')
+            .then((response) =>{
+                for(var i in response.data){
+                    uid = i;
+                }
+                axios.delete('api/v1/counters/'+uid+'.json',)
+                    .then((response) => {
+                        dispatch({
+                            type : DELETECOUNTER,
+                            payload: { id } 
+                        })
+                    })
+                    .catch( (error) => {
+                        console.log(error)
+                        dispatch({
+                            type : DELETECOUNTER,
+                            payload: { error }
+                        })
+                    })
+                
+            }).catch((e) => console.log(e.message))
     }
 }
 

@@ -21,7 +21,18 @@ const counterReducer = (state = initialState , action) => {
                 items: state.items.concat(action.payload)
             }
         case DELETECOUNTER:
-            return state.items.filter((name,i,state) => i !== action.payload.index)
+            const updtItems3 = []
+            for(let key in state.items){
+                console.log('el payload id es: '+action.payload.id)
+                if(action.payload.id !== state.items[key].id){
+                    console.log('el item id es: '+state.items[key].id)
+                    updtItems3.push(state.items[key])
+                } 
+            }
+            return {
+                ...state,
+                items: updtItems3
+            }
         case INCREMENT:
             const updtItems1 = []
             for(let key in state.items){
