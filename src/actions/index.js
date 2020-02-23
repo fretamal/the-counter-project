@@ -54,17 +54,17 @@ export const newCounter = (id, name, value) => {
     }
 }
 
-export const incrementCount = (index) => {
+export const incrementCount = (id) => {
     return{
         type : INCREMENT,
-        payload: { index }
+        payload: { id }
     }
 }
 
-export const decrementCount = (index) => {
+export const decrementCount = (id) => {
     return{
         type : DECREMENT,
-        payload: { index }
+        payload: { id }
     }
 }
 

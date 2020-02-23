@@ -16,29 +16,38 @@ const counterReducer = (state = initialState , action) => {
         case FETCHCOUNTERSFAIL:
             return {...state, error: true}
         case NEWCOUNTER:
-            console.log(action.payload);
-            // const newItem = {id:action.id, name:action.name, value:action.value}
-            // const newCounter = {id: action.id , name: action.name , value: action.value} ;
             return {
-                    ...state,
-                    items: state.items.concat(action.payload)
+                ...state,
+                items: state.items.concat(action.payload)
             }
         case DELETECOUNTER:
             return state.items.filter((name,i,state) => i !== action.payload.index)
         case INCREMENT:
-            return state.map((counter,i)=>{
-                if(action.payload.index === i){
-                    counter.value += 1;
-                }
-                return counter
-            })
+            const updtItems1 = []
+            for(let key in state.items){
+                if(action.payload.id === state.items[key].id){
+                    state.items[key].value += 1;
+                    updtItems1.push(state.items[key])
+                }else{
+                    updtItems1.push(state.items[key])
+                } 
+            }
+            return {
+                ...state, items: updtItems1
+            }
         case DECREMENT:
-            return state.map((counter,i)=>{
-                if(action.payload.index === i){
-                    counter.value += -1;
-                }
-                return counter
-            })
+            const updtItems2 = []
+            for(let key in state.items){
+                if(action.payload.id === state.items[key].id){
+                    state.items[key].value += -1;
+                    updtItems2.push(state.items[key])
+                }else{
+                    updtItems2.push(state.items[key])
+                } 
+            }
+            return {
+                ...state, items: updtItems2
+            }
         default:
             return state
     }

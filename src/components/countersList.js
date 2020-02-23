@@ -18,7 +18,7 @@ class Counters extends Component {
             return(
                 <Counter
                     key={index}
-                    index={index}
+                    id={counter.id}
                     value={counter.value}
                     name={counter.name}
                     incrementCount={this.props.incrementCount}
