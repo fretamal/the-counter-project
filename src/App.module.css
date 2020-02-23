@@ -1,9 +1,10 @@
 .AppWrapper {
   display: flex;
-  height: 100vh;
+  height: 100%;
   justify-content: center;
   background-color: #e6e6e6;
   color: #333333;
+
 }
 
 .ContentWrapper{
