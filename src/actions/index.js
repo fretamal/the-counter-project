@@ -8,6 +8,7 @@ export const DECREMENT = 'DECREMENT'
 export const NEWCOUNTER = 'NEWCOUNTER'
 export const DELETECOUNTER = 'DELETECOUNTER'
 export const FILTERCOUNTERSBYMAX = 'FILTERCOUNTERSBYMAX'
+export const ORDERCOUNTERS = 'ORDERCOUNTERS'
 
 // Action creators
 
@@ -151,10 +152,37 @@ export const deleteCounter = (id) => {
     }
 }
 
-// export const filterByMax = (index) => {
-//     return{
-//         type : FILTERCOUNTERSBYMAX,
-//         value: value,
-//         payload: { items:size === '' ? counters : counters.filter( a => a.value <= value) }
-//     }
-// }
+export const filterByMax = (counters, max) => {
+    return{
+        type : FILTERCOUNTERSBYMAX,
+        payload: { 
+            max: max,
+            items:max === '' ? counters : counters.filter( a => a.value <= max) 
+        }
+    }
+}
+
+export const sortCounters = (counters, sort) => {
+    return(dispatch) =>{
+        // let newSort = null
+        // if(sort !== ''){
+        //     if(sort === 'asc'){
+        //         newSort = counters.sort((a,b) => a.value > b.value ? 1 : -1)
+        //     }else if(sort === 'desc'){
+        //         newSort = counters.sort((a,b) => a.value < b.value ? 1 : -1)
+        //     }else if(sort === 'name'){
+        //         newSort = counters.sort((a,b) => a.name > b.name ? 1 : -1)
+        //     }else{
+        //         newSort = counters
+        //     }
+            
+        // }
+        dispatch({
+            type : ORDERCOUNTERS,
+            payload: { 
+                sort: sort,
+                items: counters 
+            }
+        })
+    }
+}

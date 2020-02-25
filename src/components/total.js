@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classes from './total.module.css';
-import {fetchCounters} from '../actions/'
 
 
 class Total extends Component {

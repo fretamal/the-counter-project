@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classes from './options.module.css';
-
+import { filterByMax, sortCounters } from '../actions/'
 
 class Options extends Component {
     render(){
@@ -9,10 +9,10 @@ class Options extends Component {
             <div className={classes.OptionsWrapper}>
               <div className={classes.SortWrapper}>
                     <span className={classes.SortBy}>Ordernar por</span>
-                    <select className={classes.SortSelect}>
-                        <option>Nombre</option>
-                        <option>Cantidad Ascendente</option>
-                        <option>Cantidad Descendente</option>
+                    <select className={classes.SortSelect} value={this.props.sort} onChange={(e) => this.props.sortCounters(this.props.counters, e.target.value)}>
+                        <option value="name">Nombre</option>
+                        <option value="asc">Cantidad Ascendente</option>
+                        <option value="desc">Cantidad Descendente</option>
                     </select>
                 </div>
                 <div className={classes.FilterWrapper}>
@@ -24,7 +24,7 @@ class Options extends Component {
                                 <span className={classes.FilterOption}>Más de:</span>
                             </td>
                             <td>
-                                <input className={classes.FilterInput}/>
+                                <input className={classes.FilterInput} onChange={(e)=> this.props.filterByMax(this.props.counters,e.target.value)}/>
                             </td>
                         </tr>
                         <tr>
@@ -54,8 +54,20 @@ class Options extends Component {
 
 const mapStateToProps = (state) => {
     return{
+        counters: state.counters.items,
+        filteredItems: state.counters.filteredItems,
+        max: state.counters.max,
+        sort: state.counters.sort
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        filterByMax,
+        sortCounters,
     }
 }
 
 
-export default connect(mapStateToProps)(Options)
+
+export default connect(mapStateToProps,mapDispatchToProps())(Options)

@@ -1,4 +1,4 @@
-import { FETCHCOUNTERS, FETCHCOUNTERSFAIL, INCREMENT, DECREMENT, NEWCOUNTER, DELETECOUNTER } from '../actions/'
+import { FETCHCOUNTERS, FETCHCOUNTERSFAIL, INCREMENT, DECREMENT, NEWCOUNTER, DELETECOUNTER, FILTERCOUNTERSBYMAX, ORDERCOUNTERS } from '../actions/'
 
 const initialState = {
     items: null,
@@ -12,13 +12,14 @@ const initialState = {
 const counterReducer = (state = initialState , action) => {
     switch(action.type){
         case FETCHCOUNTERS:
-            return {...state, items: action.payload, error: false}
+            return {...state, items: action.payload, error: false, filteredItems: action.payload}
         case FETCHCOUNTERSFAIL:
             return {...state, error: true}
         case NEWCOUNTER:
             return {
                 ...state,
-                items: state.items.concat(action.payload)
+                items: state.items.concat(action.payload),
+                filteredItems: state.filteredItems.concat(action.payload)
             }
         case DELETECOUNTER:
             const updtItems3 = []
@@ -31,7 +32,8 @@ const counterReducer = (state = initialState , action) => {
             }
             return {
                 ...state,
-                items: updtItems3
+                items: updtItems3,
+                filteredItems: updtItems3
             }
         case INCREMENT:
             const updtItems1 = []
@@ -44,7 +46,9 @@ const counterReducer = (state = initialState , action) => {
                 } 
             }
             return {
-                ...state, items: updtItems1
+                ...state, 
+                items: updtItems1,
+                filteredItems: updtItems1
             }
         case DECREMENT:
             const updtItems2 = []
@@ -57,7 +61,38 @@ const counterReducer = (state = initialState , action) => {
                 } 
             }
             return {
-                ...state, items: updtItems2
+                ...state, 
+                items: updtItems2,
+                filteredItems: updtItems2
+
+            }
+        case FILTERCOUNTERSBYMAX:
+            return{
+                ...state, 
+                filteredItems: action.payload.items, 
+                max: action.payload.max
+            }
+        case ORDERCOUNTERS:
+            let counters = action.payload.items
+            let sort = action.payload.sort
+            let newSort = null
+            if(sort !== ''){
+                if(sort === 'asc'){
+                    newSort = counters.sort((a,b) => a.value > b.value ? 1 : -1)
+                }else if(sort === 'desc'){
+                    newSort = counters.sort((a,b) => a.value < b.value ? 1 : -1)
+                }else if(sort === 'name'){
+                    newSort = counters.sort((a,b) => a.name > b.name ? 1 : -1)
+                }else{
+                    newSort = counters
+                }
+                
+            }
+
+            return{
+                ...state, 
+                filteredItems: newSort, 
+                sort: action.payload.sort
             }
         default:
             return state
