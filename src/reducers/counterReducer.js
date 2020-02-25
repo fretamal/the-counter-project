@@ -64,7 +64,6 @@ const counterReducer = (state = initialState , action) => {
                 ...state, 
                 items: updtItems2,
                 filteredItems: updtItems2
-
             }
         case FILTERCOUNTERSBYMAX:
             return{
@@ -86,9 +85,7 @@ const counterReducer = (state = initialState , action) => {
                 }else{
                     newSort = counters
                 }
-                
             }
-
             return{
                 ...state, 
                 filteredItems: newSort, 

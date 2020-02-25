@@ -13,15 +13,6 @@ class Counters extends Component {
         this.props.fetchCounters();
     }
 
-    // shouldComponentUpdate(nextProps) { 
-    //     // console.log(nextProps.counters[0].name)
-    //     console.log(this.props.counters)
-    //     if(nextProps.counters[0].name !== this.props.counters[0].name) {
-    //         return true
-    //     }
-    //     return false;
-    // }
-
     renderCounters(){
         return this.props.counters.map((counter,index) =>{
             return(
@@ -62,7 +53,8 @@ class Counters extends Component {
 const mapStateToProps = (state) => {
     return{
         counters: state.counters.filteredItems,
-        error: state.error
+        error: state.error,
+        sort: state.counters.sort
     }
 }
 

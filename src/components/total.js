@@ -19,7 +19,7 @@ class Total extends Component {
 
 const mapStateToProps = (state) => {
     return{
-        counters: state.counters.items
+        counters: state.counters.filteredItems
     }
 }
 

@@ -11,8 +11,8 @@ class Options extends Component {
                     <span className={classes.SortBy}>Ordernar por</span>
                     <select className={classes.SortSelect} value={this.props.sort} onChange={(e) => this.props.sortCounters(this.props.counters, e.target.value)}>
                         <option value="name">Nombre</option>
-                        <option value="asc">Cantidad Ascendente</option>
-                        <option value="desc">Cantidad Descendente</option>
+                        <option value="asc">Valor Ascendente</option>
+                        <option value="desc">Valor Descendente</option>
                     </select>
                 </div>
                 <div className={classes.FilterWrapper}>
@@ -21,7 +21,7 @@ class Options extends Component {
                         <tbody>
                         <tr>
                             <td>
-                                <span className={classes.FilterOption}>Más de:</span>
+                                <span className={classes.FilterOption}>Mayor a:</span>
                             </td>
                             <td>
                                 <input className={classes.FilterInput} onChange={(e)=> this.props.filterByMax(this.props.counters,e.target.value)}/>
@@ -29,7 +29,7 @@ class Options extends Component {
                         </tr>
                         <tr>
                             <td>
-                                <span className={classes.FilterOption}>Menos de:</span>
+                                <span className={classes.FilterOption}>Menor a:</span>
                             </td>
                             <td>
                                 <input className={classes.FilterInput}/>
