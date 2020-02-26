@@ -155,24 +155,26 @@ export const deleteCounter = (id) => {
 }
 
 export const filterByRange = (counters, max,min) => {
-    let filtered = null;
-    if(min === '' && max !== ''){
-        filtered = counters.filter( a => a.value > max)
-    }else if(min !== '' && max === ''){
-        filtered = counters.filter( a => a.value < min)
-    }else if(min !== '' && max !== ''){
-        let firsfilter = counters.filter( a => a.value > max)
-        filtered =firsfilter.filter( a => a.value < min)
-    }else{
-        filtered = counters
-    }
-    return{
-        type : FILTERBYRANGE,
-        payload: { 
-            max: max,
-            min: min,
-            items:filtered
+    return(dispatch) =>{
+        let filtered = null;
+        if(min === '' && max !== ''){
+            filtered = counters.filter( a => a.value > max)
+        }else if(min !== '' && max === ''){
+            filtered = counters.filter( a => a.value < min)
+        }else if(min !== '' && max !== ''){
+            let firsfilter = counters.filter( a => a.value > max)
+            filtered =firsfilter.filter( a => a.value < min)
+        }else{
+            filtered = counters
         }
+        dispatch({
+            type : FILTERBYRANGE,
+            payload: { 
+                max: max,
+                min: min,
+                items:filtered
+            }
+        })
     }
 }
 
@@ -200,14 +202,19 @@ export const sortCounters = (counters, sort) => {
     }
 }
 
-
 export const searchCounters = (counters, search) => {
     return(dispatch) =>{
+        let filtered = null
+        if(search !== ''){
+            filtered = counters.filter(a => a.name.includes(search.toLowerCase()))
+        }else{
+            filtered = counters
+        }
         dispatch({
-            type : ORDERCOUNTERS,
+            type : SEARCHCOUNTERS,
             payload: { 
                 search: search,
-                items: counters 
+                items: filtered
             }
         })
     }

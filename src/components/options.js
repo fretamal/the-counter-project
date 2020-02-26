@@ -55,7 +55,7 @@ class Options extends Component {
                         type="text"
                         onChange={(e) => this.setState({search: e.target.value}) }
                     />
-                    <button className={classes.SearchBtn} onClick={() => this.searchCounter((e) => this.props.counters, this.state.search)}>
+                    <button className={classes.SearchBtn} onClick={() => this.props.searchCounters(this.props.counters, this.state.search)}>
                         <img className={classes.SearchImg} src={require('../assets/search2.png')} alt="buscar"/>    
                     </button>
                 </div>
