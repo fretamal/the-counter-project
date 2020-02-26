@@ -20,6 +20,7 @@ class Options extends Component {
               <div className={classes.SortWrapper}>
                     <span className={classes.SortBy}>Ordernar por</span>
                     <select className={classes.SortSelect} value={this.props.sort} onChange={(e) => this.props.sortCounters(this.props.counters, e.target.value)}>
+                        <option value="">- Seleccione - </option>
                         <option value="name">Nombre</option>
                         <option value="asc">Valor Ascendente</option>
                         <option value="desc">Valor Descendente</option>

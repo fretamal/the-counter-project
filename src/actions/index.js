@@ -191,6 +191,8 @@ export const sortCounters = (counters, sort) => {
             }else{
                 newSort = counters
             }
+        }else{
+            newSort = counters
         }
         dispatch({
             type : ORDERCOUNTERS,

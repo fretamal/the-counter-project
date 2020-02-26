@@ -36,7 +36,7 @@ class Counters extends Component {
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Valor</th>
+                            <th className={classes.TableRowCenter}>Valor</th>
                             <th></th>
                         </tr>
                     </thead>
