@@ -13,19 +13,23 @@ class AddCounter extends Component {
 
         }
     }
+
+    makeid(length) {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+           result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+     }
+
+    sendInfo(){
+        this.props.newCounter(this.makeid(7),this.state.name,0)
+        this.setState({name : ''})
+    }
+
     render() {
-
-        function makeid(length) {
-            var result           = '';
-            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            var charactersLength = characters.length;
-            for ( var i = 0; i < length; i++ ) {
-               result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
-         }
-
-         
         return (
             <div className={classes.AddWrapper}>
                 <h3 className={classes.Title}>Nuevo</h3>
@@ -37,7 +41,7 @@ class AddCounter extends Component {
                         value={this.state.name} 
                         onChange={(e) => this.setState({name: e.target.value}) }
                     />
-                    <button type="button" className={classes.Btn} onClick={() => this.props.newCounter(makeid(7),this.state.name,0) }>Agregar</button>
+                    <button type="button" className={classes.Btn} onClick={() => this.sendInfo()}>Agregar</button>
                 </div>
             </div>
         )        

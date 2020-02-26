@@ -1,4 +1,4 @@
-import { FETCHCOUNTERS, FETCHCOUNTERSFAIL, INCREMENT, DECREMENT, NEWCOUNTER, DELETECOUNTER, FILTERCOUNTERSBYMAX, ORDERCOUNTERS } from '../actions/'
+import { FETCHCOUNTERS, FETCHCOUNTERSFAIL, INCREMENT, DECREMENT, NEWCOUNTER, DELETECOUNTER, FILTERBYRANGE, ORDERCOUNTERS,SEARCHCOUNTERS } from '../actions/'
 
 const initialState = {
     items: null,
@@ -6,6 +6,7 @@ const initialState = {
     max: '',
     min: '',
     sort: '',
+    search: '',
     error: false
 }
 
@@ -24,9 +25,7 @@ const counterReducer = (state = initialState , action) => {
         case DELETECOUNTER:
             const updtItems3 = []
             for(let key in state.items){
-                console.log('el payload id es: '+action.payload.id)
                 if(action.payload.id !== state.items[key].id){
-                    console.log('el item id es: '+state.items[key].id)
                     updtItems3.push(state.items[key])
                 } 
             }
@@ -65,31 +64,25 @@ const counterReducer = (state = initialState , action) => {
                 items: updtItems2,
                 filteredItems: updtItems2
             }
-        case FILTERCOUNTERSBYMAX:
+        case FILTERBYRANGE:
             return{
                 ...state, 
                 filteredItems: action.payload.items, 
-                max: action.payload.max
+                max: action.payload.max,
+                min: action.payload.min
             }
         case ORDERCOUNTERS:
-            let counters = action.payload.items
-            let sort = action.payload.sort
-            let newSort = null
-            if(sort !== ''){
-                if(sort === 'asc'){
-                    newSort = counters.sort((a,b) => a.value > b.value ? 1 : -1)
-                }else if(sort === 'desc'){
-                    newSort = counters.sort((a,b) => a.value < b.value ? 1 : -1)
-                }else if(sort === 'name'){
-                    newSort = counters.sort((a,b) => a.name > b.name ? 1 : -1)
-                }else{
-                    newSort = counters
-                }
-            }
             return{
                 ...state, 
-                filteredItems: newSort, 
+                filteredItems: action.payload.items, 
                 sort: action.payload.sort
+            }
+
+        case SEARCHCOUNTERS:
+            return{
+                ...state, 
+                filteredItems: action.payload.items, 
+                search: action.payload.search
             }
         default:
             return state

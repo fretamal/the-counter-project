@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import classes from './options.module.css';
-import { filterByMax, sortCounters } from '../actions/'
+import {sortCounters, filterByRange, searchCounters } from '../actions/'
 
 class Options extends Component {
+
+    constructor(props){
+        super(props)
+
+        this.state = {
+            search: '',
+
+        }
+    }
+
     render(){
         return(
             <div className={classes.OptionsWrapper}>
@@ -24,7 +34,7 @@ class Options extends Component {
                                 <span className={classes.FilterOption}>Mayor a:</span>
                             </td>
                             <td>
-                                <input className={classes.FilterInput} onChange={(e)=> this.props.filterByMax(this.props.counters,e.target.value)}/>
+                                <input className={classes.FilterInput} value={this.props.max} onChange={(e)=> this.props.filterByRange(this.props.counters,e.target.value,this.props.min)}/>
                             </td>
                         </tr>
                         <tr>
@@ -32,7 +42,7 @@ class Options extends Component {
                                 <span className={classes.FilterOption}>Menor a:</span>
                             </td>
                             <td>
-                                <input className={classes.FilterInput}/>
+                                <input className={classes.FilterInput} value={this.props.min} onChange={(e)=> this.props.filterByRange(this.props.counters,this.props.max,e.target.value)}/>
                             </td>
                         </tr>
                         </tbody>
@@ -40,10 +50,13 @@ class Options extends Component {
                 </div>
                 <div className={classes.SearchWrapper}>
                     <p className={classes.SearchText}>Buscar</p>
-                    <input className={classes.SearchInput} placeholder="Por nombre" type="text"></input>
-                    <button className={classes.SearchBtn}>
-                    <img className={classes.SearchImg} src={require('../assets/search2.png')} alt="buscar"/>    
-
+                    <input className={classes.SearchInput} 
+                        placeholder="Por nombre" 
+                        type="text"
+                        onChange={(e) => this.setState({search: e.target.value}) }
+                    />
+                    <button className={classes.SearchBtn} onClick={() => this.searchCounter((e) => this.props.counters, this.state.search)}>
+                        <img className={classes.SearchImg} src={require('../assets/search2.png')} alt="buscar"/>    
                     </button>
                 </div>
             </div> 
@@ -57,14 +70,17 @@ const mapStateToProps = (state) => {
         counters: state.counters.items,
         filteredItems: state.counters.filteredItems,
         max: state.counters.max,
-        sort: state.counters.sort
+        min: state.counters.min,
+        sort: state.counters.sort,
+        search: state.counters.search
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return{
-        filterByMax,
+        filterByRange,
         sortCounters,
+        searchCounters,
     }
 }
 

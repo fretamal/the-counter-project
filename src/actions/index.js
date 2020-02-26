@@ -7,8 +7,10 @@ export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 export const NEWCOUNTER = 'NEWCOUNTER'
 export const DELETECOUNTER = 'DELETECOUNTER'
-export const FILTERCOUNTERSBYMAX = 'FILTERCOUNTERSBYMAX'
+export const FILTERBYRANGE = 'FILTERBYRANGE'
 export const ORDERCOUNTERS = 'ORDERCOUNTERS'
+export const SEARCHCOUNTERS = 'SEARCHCOUNTERS'
+
 
 // Action creators
 
@@ -36,7 +38,7 @@ export const fetchCounters = () => {
 
 export const newCounter = (id, name, value) => {
     return(dispatch) =>{
-    const counter = {id: id, name: name, value: value}
+    const counter = {id: id, name: name.toLowerCase(), value: value}
     axios.post('api/v1/counters.json', counter)
         .then((response) => {
             dispatch({
@@ -152,35 +154,59 @@ export const deleteCounter = (id) => {
     }
 }
 
-export const filterByMax = (counters, max) => {
+export const filterByRange = (counters, max,min) => {
+    let filtered = null;
+    if(min === '' && max !== ''){
+        filtered = counters.filter( a => a.value > max)
+    }else if(min !== '' && max === ''){
+        filtered = counters.filter( a => a.value < min)
+    }else if(min !== '' && max !== ''){
+        let firsfilter = counters.filter( a => a.value > max)
+        filtered =firsfilter.filter( a => a.value < min)
+    }else{
+        filtered = counters
+    }
     return{
-        type : FILTERCOUNTERSBYMAX,
+        type : FILTERBYRANGE,
         payload: { 
             max: max,
-            items:max === '' ? counters : counters.filter( a => a.value <= max) 
+            min: min,
+            items:filtered
         }
     }
 }
 
 export const sortCounters = (counters, sort) => {
     return(dispatch) =>{
-        // let newSort = null
-        // if(sort !== ''){
-        //     if(sort === 'asc'){
-        //         newSort = counters.sort((a,b) => a.value > b.value ? 1 : -1)
-        //     }else if(sort === 'desc'){
-        //         newSort = counters.sort((a,b) => a.value < b.value ? 1 : -1)
-        //     }else if(sort === 'name'){
-        //         newSort = counters.sort((a,b) => a.name > b.name ? 1 : -1)
-        //     }else{
-        //         newSort = counters
-        //     }
-            
-        // }
+        let newSort = null
+        if(sort !== ''){
+            if(sort === 'asc'){
+                newSort = counters.sort((a,b) => a.value > b.value ? 1 : -1)
+            }else if(sort === 'desc'){
+                newSort = counters.sort((a,b) => a.value < b.value ? 1 : -1)
+            }else if(sort === 'name'){
+                newSort = counters.sort((a,b) => a.name > b.name ? 1 : -1)
+            }else{
+                newSort = counters
+            }
+        }
         dispatch({
             type : ORDERCOUNTERS,
             payload: { 
                 sort: sort,
+                items: newSort 
+            }
+        })
+    }
+}
+
+
+export const searchCounters = (counters, search) => {
+    return(dispatch) =>{
+        dispatch({
+            type : ORDERCOUNTERS,
+            payload: { 
+                search: search,
                 items: counters 
             }
         })
