@@ -6,7 +6,7 @@ import classes from './total.module.css';
 class Total extends Component {
 
     render(){
-        const total = this.props.counters ? this.props.counters.reduce((tot, counter) => tot + counter.value, 0) : 0
+        const total = this.props.counters ? this.props.counters.reduce((tot, counter) => tot + counter.value, 0) : ''
         return(
             <div className={classes.TotalWrapper}>
                 <span className={classes.Total}>Total:</span> 

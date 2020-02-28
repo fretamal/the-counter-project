@@ -57,3 +57,48 @@
 .TableRowRight{
     text-align: right;
 }
+.Modal{
+    text-transform: uppercase;
+    color: #333333;
+    padding:15px 40px;
+    padding-bottom: 30px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+.ModalTitle{
+    font-weight: 300;
+    font-size: 22px;
+}
+.ModalMsg{
+    font-weight: 100;
+    font-size: 14px;
+}
+.ModalNo{
+    background-color: #FF6663;
+    border: 0px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 15px;
+    font-weight: 700;
+    margin-right: 10px;
+}
+.ModalNo:hover{
+    background-color: #f15754;
+    cursor: pointer;
+}
+.ModalYes{
+    background-color: #80D142;
+    border: 0px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 15px;
+    font-weight: 700;
+}
+.ModalYes:hover{
+    background-color: #72c334;
+    cursor: pointer;
+}
