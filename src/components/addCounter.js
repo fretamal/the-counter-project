@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { newCounter } from '../actions/'
 import classes from './addCounter.module.css'
+import { confirmAlert } from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
 
 export class AddCounter extends Component {
 
@@ -13,6 +15,21 @@ export class AddCounter extends Component {
 
         }
     }
+
+    alert(){
+        confirmAlert({
+          customUI: ({ onClose }) => {
+            return (
+                <div className='custom-ui'>
+                    <div className={classes.Modal}>
+                        <p className={classes.ModalMsg}>El nombre no puede estar vacio</p>
+                        <button className={classes.ModalYes} onClick={onClose}>ok!</button>
+                    </div>
+                </div>
+                );
+            } 
+        });
+      };
 
     makeid(length) {
         var result           = '';
@@ -41,7 +58,7 @@ export class AddCounter extends Component {
                         value={this.state.name} 
                         onChange={(e) => this.setState({name: e.target.value}) }
                     />
-                    <button type="button" className={classes.Btn} onClick={() => this.sendInfo()}>Agregar</button>
+                    <button type="button" className={classes.Btn} onClick={() =>this.state.name ? this.sendInfo() : this.alert() }>Agregar</button>
                 </div>
             </div>
         )        

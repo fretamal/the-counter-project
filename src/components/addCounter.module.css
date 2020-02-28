@@ -47,6 +47,38 @@
 .FormWrapper{
     margin-bottom: 12px;
 }
+.Modal{
+    text-transform: uppercase;
+    color: #333333;
+    padding:15px 40px;
+    padding-bottom: 30px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.ModalMsg{
+    font-weight: 100;
+    font-size: 14px;
+}
+.ModalNo:hover{
+    background-color: #f15754;
+    cursor: pointer;
+}
+.ModalYes{
+    background-color: #80D142;
+    border: 0px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 15px;
+    font-weight: 700;
+}
+.ModalYes:hover{
+    background-color: #72c334;
+    cursor: pointer;
+}
 
 @media screen and (max-width: 800px){
     .InputText{
