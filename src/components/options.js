@@ -35,7 +35,7 @@ class Options extends Component {
                                 <span className={classes.FilterOption}>Mayor a:</span>
                             </td>
                             <td>
-                                <input className={classes.FilterInput} value={this.props.max} onChange={(e)=> this.props.filterByRange(this.props.counters,e.target.value,this.props.min)}/>
+                                <input type="number" className={classes.FilterInput} value={this.props.max} onChange={(e)=> this.props.filterByRange(this.props.counters,e.target.value,this.props.min)}/>
                             </td>
                         </tr>
                         <tr>
@@ -43,7 +43,7 @@ class Options extends Component {
                                 <span className={classes.FilterOption}>Menor a:</span>
                             </td>
                             <td>
-                                <input className={classes.FilterInput} value={this.props.min} onChange={(e)=> this.props.filterByRange(this.props.counters,this.props.max,e.target.value)}/>
+                                <input type="number" className={classes.FilterInput} value={this.props.min} onChange={(e)=> this.props.filterByRange(this.props.counters,this.props.max,e.target.value)}/>
                             </td>
                         </tr>
                         </tbody>
