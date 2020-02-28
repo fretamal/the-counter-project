@@ -4,6 +4,8 @@ import { newCounter } from '../actions/'
 import classes from './addCounter.module.css'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
+import Spinner from './spinner'
+
 export class AddCounter extends Component {
 
     constructor(props){
@@ -56,10 +58,17 @@ export class AddCounter extends Component {
                         value={this.state.name} 
                         onChange={(e) => this.setState({name: e.target.value}) }
                     />
-                    <button type="button" className={classes.Btn} onClick={() =>this.state.name ? this.sendInfo() : this.alert() }>Agregar</button>
+                    { this.props.loading ? <Spinner/> : <button type="button" className={classes.Btn} onClick={() =>this.state.name ? this.sendInfo() : this.alert() }>Agregar</button>}
                 </div>
             </div>
         )        
+    }
+}
+
+const mapStateToProps = (state) => {
+    return{
+        error: state.counters.error,
+        loading: state.counters.loading,
     }
 }
 
@@ -70,4 +79,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps())(AddCounter)
+export default connect(mapStateToProps, mapDispatchToProps())(AddCounter)

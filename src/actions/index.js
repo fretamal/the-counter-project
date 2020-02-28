@@ -39,12 +39,20 @@ export const fetchCounters = () => {
 
 export const newCounter = (id, name, value) => {
     return(dispatch) =>{
-    const counter = {id: id, name: name.toLowerCase(), value: value}
-    axios.post('api/v1/counters.json', counter)
+        dispatch({
+            type : LOADINGCOUNT,
+            payload: {status: true, id: ''} 
+        })
+        const counter = {id: id, name: name.toLowerCase(), value: value}
+        axios.post('api/v1/counters.json', counter)
         .then((response) => {
             dispatch({
                 type : NEWCOUNTER,
                 payload: counter 
+            })
+            dispatch({
+                type : LOADINGCOUNT,
+                payload: {status: false, id: ''} 
             })
         })
         .catch( (error) => {
