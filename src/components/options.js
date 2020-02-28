@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import classes from './options.module.css';
 import {sortCounters, filterByRange, searchCounters } from '../actions/'
 
-class Options extends Component {
+export class Options extends Component {
 
     constructor(props){
         super(props)
@@ -19,7 +19,7 @@ class Options extends Component {
             <div className={classes.OptionsWrapper}>
               <div className={classes.SortWrapper}>
                     <span className={classes.SortBy}>Ordernar por</span>
-                    <select className={classes.SortSelect} value={this.props.sort} onChange={(e) => this.props.sortCounters(this.props.counters, e.target.value)}>
+                    <select data-testid="select" className={classes.SortSelect} value={this.props.sort} onChange={(e) => this.props.sortCounters(this.props.counters, e.target.value)}>
                         <option value="">- Seleccione - </option>
                         <option value="name">Nombre</option>
                         <option value="asc">Valor Ascendente</option>
@@ -35,7 +35,7 @@ class Options extends Component {
                                 <span className={classes.FilterOption}>Mayor a:</span>
                             </td>
                             <td>
-                                <input type="number" className={classes.FilterInput} value={this.props.max} onChange={(e)=> this.props.filterByRange(this.props.counters,e.target.value,this.props.min)}/>
+                                <input type="number" alt="mayor" className={classes.FilterInput} value={this.props.max} onChange={(e)=> this.props.filterByRange(this.props.counters,e.target.value,this.props.min)}/>
                             </td>
                         </tr>
                         <tr>
@@ -43,7 +43,7 @@ class Options extends Component {
                                 <span className={classes.FilterOption}>Menor a:</span>
                             </td>
                             <td>
-                                <input type="number" className={classes.FilterInput} value={this.props.min} onChange={(e)=> this.props.filterByRange(this.props.counters,this.props.max,e.target.value)}/>
+                                <input type="number" alt="menor" className={classes.FilterInput} value={this.props.min} onChange={(e)=> this.props.filterByRange(this.props.counters,this.props.max,e.target.value)}/>
                             </td>
                         </tr>
                         </tbody>
