@@ -88,3 +88,13 @@
     width: 12px;
 
 }
+
+@media screen and (max-width: 800px){
+    .OptionsWrapper{
+      border-right-width: 0px;
+      max-width: 100%;
+      height: auto;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+}

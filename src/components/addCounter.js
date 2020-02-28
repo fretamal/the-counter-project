@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { newCounter } from '../actions/'
 import classes from './addCounter.module.css'
 
-class AddCounter extends Component {
+export class AddCounter extends Component {
 
     constructor(props){
         super(props)

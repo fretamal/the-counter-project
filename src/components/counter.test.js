@@ -1,8 +1,10 @@
 import React from 'react'
-import { render, fireEvent, queryByText, queryByAltText} from '@testing-library/react'
+import { render, cleanup, fireEvent, queryByText, queryByAltText} from '@testing-library/react'
 import  Counter  from './counter'
 
-it("renderiza correctamente el componente", () => {
+afterEach(cleanup)
+
+it("Se renderiza correctamente el <Counter/>", () => {
     const {queryByText,queryByAltText} = render(<Counter />)
     expect(queryByText('+')).toBeTruthy()
     expect(queryByText('-')).toBeTruthy()

@@ -36,3 +36,12 @@
   font-weight: 200;
   letter-spacing: 10px;
 }
+
+@media screen and (max-width: 800px){
+  .SideBar{
+    flex-direction: column;
+  }
+  html{
+    height: auto;
+  }
+}
