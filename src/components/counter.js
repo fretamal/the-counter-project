@@ -2,10 +2,11 @@ import React from 'react'
 import classes from './counter.module.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import Spinner from './spinner'
 
 const Counter = (props) => {
 
-    const submit = () => {
+    function submit(){
         
         confirmAlert({
           customUI: ({ onClose }) => {
@@ -35,12 +36,12 @@ const Counter = (props) => {
             <td><span className={classes.Name}>{props.name}</span></td>
             <td className={classes.TableRowCenter}>
                 <button className={classes.Subs} onClick={ () => props.decrementCount(props.id) }> - </button>
-                <span className={classes.Count}>{props.value}</span>
+                {(props.loading && props.loadingid === props.id ) ? <div className={classes.SpinnerWrap}><Spinner/></div> : <div className={classes.Count}>{props.value}</div> }
                 <button className={classes.Add} onClick={ () => props.incrementCount(props.id) }> + </button>
             </td>
             <td className={classes.TableRowRight}>
                 {/* <button className={classes.Delete} onClick={ () => props.deleteCounter(props.id) }> */}
-                <button className={classes.Delete} onClick={ submit }>
+                <button data-testid="Borrar" className={classes.Delete} onClick={ () => submit() }>
                     <img className={classes.Trash} src={require('../assets/trash.png')} alt="Borrar"/>    
                 </button>
             </td>

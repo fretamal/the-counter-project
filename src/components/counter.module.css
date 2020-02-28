@@ -13,6 +13,8 @@
     font-weight: bold;
     font-size: 12px;
     letter-spacing: 3px;
+    display: inline-block;
+    min-width: 30px;
 }
 .Subs{
     background-color: #FF6663;
@@ -102,4 +104,11 @@
 .ModalYes:hover{
     background-color: #72c334;
     cursor: pointer;
+}
+.SpinnerWrap{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    min-width: 30px;
+    margin: 0px 10px;
 }

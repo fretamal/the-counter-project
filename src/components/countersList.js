@@ -24,6 +24,8 @@ class Counters extends Component {
                     incrementCount={this.props.incrementCount}
                     decrementCount={this.props.decrementCount}
                     deleteCounter={this.props.deleteCounter}
+                    loading={this.props.loading}
+                    loadingid={this.props.loadingid}
                 />
             )
         })
@@ -53,8 +55,10 @@ class Counters extends Component {
 const mapStateToProps = (state) => {
     return{
         counters: state.counters.filteredItems,
-        error: state.error,
-        sort: state.counters.sort
+        error: state.counters.error,
+        sort: state.counters.sort,
+        loading: state.counters.loading,
+        loadingid: state.counters.loadingid,
     }
 }
 

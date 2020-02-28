@@ -5,6 +5,7 @@ export const FETCHCOUNTERS = 'FETCHCOUNTERS'
 export const FETCHCOUNTERSFAIL = 'FETCHCOUNTERSFAIL'
 export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
+export const LOADINGCOUNT = 'LOADINGCOUNT'
 export const NEWCOUNTER = 'NEWCOUNTER'
 export const DELETECOUNTER = 'DELETECOUNTER'
 export const FILTERBYRANGE = 'FILTERBYRANGE'
@@ -59,6 +60,10 @@ export const newCounter = (id, name, value) => {
 export const incrementCount = (id) => {
 
     return(dispatch) =>{
+        dispatch({
+            type : LOADINGCOUNT,
+            payload: {status: true, id: id} 
+        })
         // Firebase tiene un UID unico por elemento, primero se debe obtener ese uid para luego eliminar
         // el elemento de la lista
         let uid = null;
@@ -73,10 +78,13 @@ export const incrementCount = (id) => {
                 let newCounter = {...counter, value: counter.value+1}
                 axios.put('api/v1/counters/'+uid+'.json',newCounter)
                     .then((response) => {
-                        console.log(response)
                         dispatch({
                             type : INCREMENT,
                             payload: { id } 
+                        })
+                        dispatch({
+                            type : LOADINGCOUNT,
+                            payload: {status: false, id: ''} 
                         })
                     })
                     .catch( (error) => {
@@ -93,6 +101,10 @@ export const incrementCount = (id) => {
 
 export const decrementCount = (id) => {
     return(dispatch) =>{
+        dispatch({
+            type : LOADINGCOUNT,
+            payload: {status: true, id: id} 
+        })
         // Firebase tiene un UID unico por elemento, primero se debe obtener ese uid para luego eliminar
         // el elemento de la lista
         let uid = null;
@@ -107,10 +119,13 @@ export const decrementCount = (id) => {
                 let newCounter = {...counter, value: counter.value-1}
                 axios.put('api/v1/counters/'+uid+'.json',newCounter)
                     .then((response) => {
-                        console.log(response)
                         dispatch({
                             type : DECREMENT,
                             payload: { id } 
+                        })
+                        dispatch({
+                            type : LOADINGCOUNT,
+                            payload: {status: false, id: ''} 
                         })
                     })
                     .catch( (error) => {

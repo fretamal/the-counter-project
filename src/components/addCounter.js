@@ -4,7 +4,6 @@ import { newCounter } from '../actions/'
 import classes from './addCounter.module.css'
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
-
 export class AddCounter extends Component {
 
     constructor(props){
@@ -12,7 +11,6 @@ export class AddCounter extends Component {
 
         this.state = {
             name: '',
-
         }
     }
 
