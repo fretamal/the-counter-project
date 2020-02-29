@@ -2,7 +2,8 @@ import axios from '../axios'
 
 // Action types
 export const FETCHCOUNTERS = 'FETCHCOUNTERS'
-export const FETCHCOUNTERSFAIL = 'FETCHCOUNTERSFAIL'
+export const FETCHAPIFAIL = 'FETCHAPIFAIL'
+export const RESETFETCHAPIFAIL = 'RESETFETCHAPIFAIL'
 export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 export const LOADINGCOUNT = 'LOADINGCOUNT'
@@ -31,7 +32,8 @@ export const fetchCounters = () => {
         .catch( error => {
             console.log(error)
             dispatch({
-                type : FETCHCOUNTERSFAIL,
+                type : FETCHAPIFAIL,
+                payload: {status: true, msg: 'No pudimos obtener los contadores.'}
             })
         })
     }
@@ -58,8 +60,12 @@ export const newCounter = (id, name, value) => {
         .catch( (error) => {
             console.log(error)
             dispatch({
-                type : NEWCOUNTER,
-                payload: { error }
+                type : FETCHAPIFAIL,
+                payload: {status: true, msg: 'No pudimos agregar el nuevo contador.'}
+            })
+            dispatch({
+                type : LOADINGCOUNT,
+                payload: {status: false, id: ''} 
             })
         })
     }
@@ -82,7 +88,6 @@ export const incrementCount = (id) => {
                     uid = i;
                     counter = response.data[i]
                 }
-                console.log(counter)
                 let newCounter = {...counter, value: counter.value+1}
                 axios.put('api/v1/counters/'+uid+'.json',newCounter)
                     .then((response) => {
@@ -98,12 +103,27 @@ export const incrementCount = (id) => {
                     .catch( (error) => {
                         console.log(error)
                         dispatch({
-                            type : INCREMENT,
-                            payload: { error }
+                            type : FETCHAPIFAIL,
+                            payload: {status: true, msg: 'No pudimos aumentar el contador.'}
+                        })
+                        dispatch({
+                            type : LOADINGCOUNT,
+                            payload: {status: false, id: ''} 
                         })
                     })
                 
-            }).catch((e) => console.log(e.message))
+            }).catch((e) => {
+                console.log(e.message)
+                dispatch({
+                    type : FETCHAPIFAIL,
+                    payload: {status: true, msg: 'No pudimos aumentar el contador.'}
+                })
+                dispatch({
+                    type : LOADINGCOUNT,
+                    payload: {status: false, id: ''} 
+                })
+
+            })
     }
 }
 
@@ -123,7 +143,6 @@ export const decrementCount = (id) => {
                     uid = i;
                     counter = response.data[i]
                 }
-                console.log(counter)
                 let newCounter = {...counter, value: counter.value-1}
                 axios.put('api/v1/counters/'+uid+'.json',newCounter)
                     .then((response) => {
@@ -139,12 +158,26 @@ export const decrementCount = (id) => {
                     .catch( (error) => {
                         console.log(error)
                         dispatch({
-                            type : DECREMENT,
-                            payload: { error }
+                            type : FETCHAPIFAIL,
+                            payload: {status: true, msg: 'No pudimos disminuir el contador.'}
+                        })
+                        dispatch({
+                            type : LOADINGCOUNT,
+                            payload: {status: false, id: ''} 
                         })
                     })
                 
-            }).catch((e) => console.log(e.message))
+            }).catch((e) => {
+                console.log(e.message)
+                dispatch({
+                    type : FETCHAPIFAIL,
+                    payload: {status: true, msg: 'No pudimos disminuir el contador.'}
+                })
+                dispatch({
+                    type : LOADINGCOUNT,
+                    payload: {status: false, id: ''} 
+                })
+            })
     }
 }
 
@@ -168,12 +201,18 @@ export const deleteCounter = (id) => {
                     .catch( (error) => {
                         console.log(error)
                         dispatch({
-                            type : DELETECOUNTER,
-                            payload: { error }
+                            type : FETCHAPIFAIL,
+                            payload: {status: true, msg: 'No pudimos eliminar el contador.'}
                         })
                     })
                 
-            }).catch((e) => console.log(e.message))
+            }).catch((e) => {
+                dispatch({
+                    type : FETCHAPIFAIL,
+                    payload: {status: true, msg: 'No pudimos eliminar el contador.'}
+                })
+                console.log(e.message)
+            })
     }
 }
 
@@ -241,6 +280,15 @@ export const searchCounters = (counters, search) => {
                 search: search,
                 items: filtered
             }
+        })
+    }
+}
+
+export const resetFetchApiFail = () => {
+    return(dispatch) =>{
+        dispatch({
+            type : RESETFETCHAPIFAIL,
+            payload: {status: false, msg: ''}
         })
     }
 }

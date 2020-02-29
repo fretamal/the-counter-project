@@ -58,7 +58,7 @@ export class AddCounter extends Component {
                         value={this.state.name} 
                         onChange={(e) => this.setState({name: e.target.value}) }
                     />
-                    { this.props.loading ? <Spinner/> : <button type="button" className={classes.Btn} onClick={() =>this.state.name ? this.sendInfo() : this.alert() }>Agregar</button>}
+                    { this.props.loading && this.props.loadingId === '' ? <Spinner/> : <button type="button" className={classes.Btn} onClick={() =>this.state.name ? this.sendInfo() : this.alert() }>Agregar</button>}
                 </div>
             </div>
         )        
@@ -69,6 +69,7 @@ const mapStateToProps = (state) => {
     return{
         error: state.counters.error,
         loading: state.counters.loading,
+        loadingId: state.counters.loadingid,
     }
 }
 

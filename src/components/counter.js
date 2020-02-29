@@ -3,6 +3,7 @@ import classes from './counter.module.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Spinner from './spinner'
+import ErrorModal from './errorModal'
 
 const Counter = (props) => {
 
@@ -30,13 +31,24 @@ const Counter = (props) => {
         });
       };
 
+    let content;
+    if(props.loading && props.loadingid === props.id){
+        content =  <div className={classes.SpinnerWrap}><Spinner/></div>
+        if(props.error){
+            content = <div className={classes.Count}><ErrorModal errorMsg={props.errormsg} resetFetchApiFail={props.resetFetchApiFail}/>{props.value}</div>
+        }
+
+    }else{
+        content = <div className={classes.Count}>{props.value}</div>
+    }
 
     return(
         <tr>
             <td><span className={classes.Name}>{props.name}</span></td>
             <td className={classes.TableRowCenter}>
                 <button className={classes.Subs} onClick={ () => props.decrementCount(props.id) }> - </button>
-                {(props.loading && props.loadingid === props.id ) ? <div className={classes.SpinnerWrap}><Spinner/></div> : <div className={classes.Count}>{props.value}</div> }
+                { content }
+                {/* {(props.loading && props.loadingid === props.id ) ? <div className={classes.SpinnerWrap}><Spinner/></div> : <div className={classes.Count}>{props.value}</div> } */}
                 <button className={classes.Add} onClick={ () => props.incrementCount(props.id) }> + </button>
             </td>
             <td className={classes.TableRowRight}>

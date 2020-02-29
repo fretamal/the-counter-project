@@ -1,4 +1,4 @@
-import { LOADINGCOUNT, FETCHCOUNTERS, FETCHCOUNTERSFAIL, INCREMENT, DECREMENT, NEWCOUNTER, DELETECOUNTER, FILTERBYRANGE, ORDERCOUNTERS,SEARCHCOUNTERS } from '../actions/'
+import { LOADINGCOUNT, FETCHCOUNTERS, FETCHAPIFAIL, RESETFETCHAPIFAIL, INCREMENT, DECREMENT, NEWCOUNTER, DELETECOUNTER, FILTERBYRANGE, ORDERCOUNTERS,SEARCHCOUNTERS } from '../actions/'
 
 const initialState = {
     items: null,
@@ -8,6 +8,7 @@ const initialState = {
     sort: '',
     search: '',
     error: false,
+    errormsg: '',
     loading: false,
     loadingid: '',
 }
@@ -16,8 +17,10 @@ const counterReducer = (state = initialState , action) => {
     switch(action.type){
         case FETCHCOUNTERS:
             return {...state, items: action.payload, error: false, filteredItems: action.payload}
-        case FETCHCOUNTERSFAIL:
-            return {...state, error: true}
+        case FETCHAPIFAIL:
+            return {...state, error: action.payload.status, errormsg: action.payload.msg}
+        case RESETFETCHAPIFAIL:
+            return {...state, error: action.payload.status, errormsg: action.payload.msg}
         case NEWCOUNTER:
             return {
                 ...state,

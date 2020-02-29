@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchCounters, incrementCount, decrementCount, deleteCounter } from '../actions/'
+import { fetchCounters, incrementCount, decrementCount, deleteCounter, resetFetchApiFail } from '../actions/'
 import Counter from './counter'
 import classes from './countersList.module.css';
 import Total from './total'
@@ -26,6 +26,9 @@ class Counters extends Component {
                     deleteCounter={this.props.deleteCounter}
                     loading={this.props.loading}
                     loadingid={this.props.loadingid}
+                    error= {this.props.error}
+                    errormsg= {this.props.errormsg}
+                    resetFetchApiFail={this.props.resetFetchApiFail}
                 />
             )
         })
@@ -56,6 +59,7 @@ const mapStateToProps = (state) => {
     return{
         counters: state.counters.filteredItems,
         error: state.counters.error,
+        errormsg: state.counters.errormsg,
         sort: state.counters.sort,
         loading: state.counters.loading,
         loadingid: state.counters.loadingid,
@@ -68,6 +72,7 @@ const mapDispatchToProps = dispatch => {
         incrementCount,
         decrementCount,
         deleteCounter,
+        resetFetchApiFail
     }
 }
 
