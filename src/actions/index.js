@@ -16,6 +16,7 @@ export const SEARCHCOUNTERS = 'SEARCHCOUNTERS'
 
 // Action creators
 
+// Función que obtine los contados existentes en la base de datos
 export const fetchCounters = () => {
     return(dispatch) =>{
         axios.get('https://the-counter-project.firebaseio.com/api/v1/counters.json')
@@ -39,6 +40,7 @@ export const fetchCounters = () => {
     }
 }
 
+// Función que agrega un nuevo contador con valor 0, id aleatoria y el nombre dado
 export const newCounter = (id, name, value) => {
     return(dispatch) =>{
         dispatch({
@@ -71,6 +73,7 @@ export const newCounter = (id, name, value) => {
     }
 }
 
+// Función que aumenta el valor de un contador en 1
 export const incrementCount = (id) => {
 
     return(dispatch) =>{
@@ -127,6 +130,7 @@ export const incrementCount = (id) => {
     }
 }
 
+// Función que disminuye el valoder de un contador en 1
 export const decrementCount = (id) => {
     return(dispatch) =>{
         dispatch({
@@ -181,6 +185,7 @@ export const decrementCount = (id) => {
     }
 }
 
+// Función que borra un contador
 export const deleteCounter = (id) => {
     return(dispatch) =>{
         // Firebase tiene un UID unico por elemento, primero se debe obtener ese uid para luego eliminar
@@ -215,7 +220,7 @@ export const deleteCounter = (id) => {
             })
     }
 }
-
+// Función que filtra los contadores con respecto a un numero mayor a o menor a
 export const filterByRange = (counters, max,min) => {
     return(dispatch) =>{
         let filtered = null;
@@ -240,6 +245,7 @@ export const filterByRange = (counters, max,min) => {
     }
 }
 
+// Función que ordena los contadores por: nombre, valor ascendente, valor descendente
 export const sortCounters = (counters, sort) => {
     return(dispatch) =>{
         let newSort = null
@@ -266,6 +272,7 @@ export const sortCounters = (counters, sort) => {
     }
 }
 
+// Función que busca en los nombres de los contadores el texto entregado
 export const searchCounters = (counters, search) => {
     return(dispatch) =>{
         let filtered = null
@@ -284,6 +291,7 @@ export const searchCounters = (counters, search) => {
     }
 }
 
+// Función que resetea el estado de error 
 export const resetFetchApiFail = () => {
     return(dispatch) =>{
         dispatch({
