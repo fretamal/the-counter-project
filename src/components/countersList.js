@@ -37,19 +37,26 @@ class Counters extends Component {
     render() {
         return (
             <div className={classes.CounterListWrapper}>
-                <table className={classes.Table}>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th className={classes.TableRowCenter}>Valor</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.counters && this.renderCounters()}
-                    </tbody>
-                </table>
-                <Total/>
+                { this.props.counters ?  (
+                    <div>
+                        <table className={classes.Table}>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th className={classes.TableRowCenter}>Valor</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.props.counters && this.renderCounters()}
+                            </tbody>
+                        </table>
+                        <Total/>
+                    </div>
+                ):( 
+                <p className={classes.EmptyList}>No hay contadores para mostrar</p>
+                )
+            }
             </div>
         )
     }
