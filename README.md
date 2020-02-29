@@ -4,6 +4,10 @@
 $ npm install
 $ npm start
 ```
+# Correr test unitarios
+```
+$ npm test
+```
 
 # Consideraciones
 
